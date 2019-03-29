@@ -1,6 +1,8 @@
 {
   "name": "ionic-metronome",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "00dc1132"
 }
