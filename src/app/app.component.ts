@@ -1,5 +1,4 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-
 import {IonRouterOutlet, Platform} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -44,7 +43,7 @@ export class AppComponent implements OnDestroy {
       this.backgroundMode.setDefaults({silent: true});
       this.backgroundMode.enable();
 
-      this.audioPlayer.preload('tabSwitch', 'assets/audio/clickSound.mp3');
+      this.audioPlayer.preload('tempo', 'assets/audios/metronome.wav');
     });
   }
 
