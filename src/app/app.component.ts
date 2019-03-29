@@ -59,7 +59,8 @@ export class AppComponent implements OnDestroy {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
       } else {
-        navigator['app'].exitApp();
+        this.backgroundMode.moveToBackground();
+        // navigator['app'].exitApp();
       }
     });
   }
