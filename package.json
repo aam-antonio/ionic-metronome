@@ -5,12 +5,10 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "serve": "ng serve",
-    "ionic:serve": "ionic serve --lab",
-    "ng:build": "ng build",
-    "ng:build:prod": "ng build --prod",
     "android:run": "ionic cordova run android",
     "android:run:prod": "ionic cordova run android --prod",
-    "lint": "ng lint"
+    "android:build": "ionic cordova build android",
+    "android:build:prod": "ionic cordova build android --prod"
   },
   "private": true,
   "dependencies": {

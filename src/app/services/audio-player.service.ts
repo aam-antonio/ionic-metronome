@@ -46,21 +46,10 @@ export class AudioPlayerService {
     } else {
       this.timerSubscription = this.timer.subscribe(() => this.nativeAudio.play(audio.asset));
     }
-
-    // this.musicControls.create({
-    //   track: 'Metronome'
-    // });
-    //
-    // this.musicControls.subscribe().subscribe(action => {
-    //   console.log(action);
-    // });
-    //
-    // this.musicControls.listen();
   }
 
   stop() {
     this.timerSubscription.unsubscribe();
     this.timer = null;
-    // this.musicControls.destroy();
   }
 }
