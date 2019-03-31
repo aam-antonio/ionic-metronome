@@ -9,7 +9,7 @@ import {Observable, Subscription, timer} from 'rxjs';
 export class AudioPlayerService {
   private audioType: string = 'html5';
   private sounds: any[] = [];
-  private timer: Observable<any>;
+  timer: Observable<any>;
   private timerSubscription: Subscription;
 
   constructor(private nativeAudio: NativeAudio,
@@ -32,7 +32,7 @@ export class AudioPlayerService {
       this.sounds.push(audio);
 
       if (isNative) {
-        await this.nativeAudio.preloadSimple(key, asset);
+        await this.nativeAudio.preloadComplex(key, asset, 1, 1, 0);
       }
     }
   }
@@ -46,10 +46,21 @@ export class AudioPlayerService {
     } else {
       this.timerSubscription = this.timer.subscribe(() => this.nativeAudio.play(audio.asset));
     }
+
+    // this.musicControls.create({
+    //   track: 'Metronome'
+    // });
+    //
+    // this.musicControls.subscribe().subscribe(action => {
+    //   console.log(action);
+    // });
+    //
+    // this.musicControls.listen();
   }
 
   stop() {
     this.timerSubscription.unsubscribe();
     this.timer = null;
+    // this.musicControls.destroy();
   }
 }
