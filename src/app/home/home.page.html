@@ -1,13 +1,14 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      {{"METRONOME" | translate}}
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
-  <ion-button size="large" (click)="audioPlayer.timer ? audioPlayer.stop() : audioPlayer.play('tempo')">
+  <ion-item>
+    <ion-label>Sonido</ion-label>
+    <ion-select interface="popover" [(ngModel)]="currentAudio" (ionChange)="audioSelected($event)">
+      <ion-select-option *ngFor="let audio of audios" [value]="audio.name">
+        {{audio.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button size="large" (click)="audioPlayer.timer ? audioPlayer.stop() : audioPlayer.play(currentAudio)">
     <ion-icon [name]="audioPlayer.timer ? 'pause' : 'play-circle'" size="large" slot="icon-only"></ion-icon>
   </ion-button>
 </ion-content>

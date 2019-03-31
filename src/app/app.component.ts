@@ -6,7 +6,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {BackgroundMode} from '@ionic-native/background-mode/ngx';
-import {AudioPlayerService} from './services/audio-player.service';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +22,7 @@ export class AppComponent implements OnDestroy {
               private statusBar: StatusBar,
               private router: Router,
               private translate: TranslateService,
-              private backgroundMode: BackgroundMode,
-              private audioPlayer: AudioPlayerService) {
+              private backgroundMode: BackgroundMode) {
     this.initializeApp();
     this.registerBackButton();
     this.initializeTranslate();
@@ -42,8 +40,6 @@ export class AppComponent implements OnDestroy {
 
       this.backgroundMode.setDefaults({silent: true});
       this.backgroundMode.enable();
-
-      this.audioPlayer.preload('tempo', 'assets/audios/metronome.wav');
     });
   }
 

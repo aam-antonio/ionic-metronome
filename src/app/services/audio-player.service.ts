@@ -21,35 +21,26 @@ export class AudioPlayerService {
   }
 
   preload(key: string, asset: string) {
-    if (this.audioType === 'html5') {
-      const audio = {
-        key: key,
-        asset: asset,
-        type: 'html5'
-      };
+    const isNative = (this.audioType !== 'html5');
+    const audio = {
+      key: key,
+      asset: isNative ? key : asset,
+      type: isNative ? 'native' : 'html5'
+    };
 
-      this.sounds.push(audio);
+    this.sounds.push(audio);
 
-    } else {
+    if (isNative) {
       this.nativeAudio.preloadSimple(key, asset);
-      const audio = {
-        key: key,
-        asset: key,
-        type: 'native'
-      };
-
-      this.sounds.push(audio);
     }
   }
 
   play(key: string) {
     const audio = this.sounds.find(sound => sound.key === key);
-
     this.timer = timer(0, 1000);
     if (audio.type === 'html5') {
       const audioAsset = new Audio(audio.asset);
       this.timerSubscription = this.timer.subscribe(() => audioAsset.play());
-
     } else {
       this.timerSubscription = this.timer.subscribe(() => this.nativeAudio.play(audio.asset));
     }
