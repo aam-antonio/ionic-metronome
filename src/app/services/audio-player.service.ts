@@ -8,8 +8,8 @@ import {Observable, Subscription, timer} from 'rxjs';
 })
 export class AudioPlayerService {
   private audioType: string = 'html5';
-  private sounds: any = [];
-  timer: Observable<any>;
+  private sounds: any[] = [];
+  private timer: Observable<any>;
   private timerSubscription: Subscription;
 
   constructor(private nativeAudio: NativeAudio,
@@ -20,18 +20,20 @@ export class AudioPlayerService {
     }
   }
 
-  preload(key: string, asset: string) {
-    const isNative = (this.audioType !== 'html5');
-    const audio = {
-      key: key,
-      asset: isNative ? key : asset,
-      type: isNative ? 'native' : 'html5'
-    };
+  async preload(key: string, asset: string) {
+    if (!this.sounds.some(sound => sound.key === key)) {
+      const isNative = (this.audioType !== 'html5');
+      const audio = {
+        key: key,
+        asset: isNative ? key : asset,
+        type: isNative ? 'native' : 'html5'
+      };
 
-    this.sounds.push(audio);
+      this.sounds.push(audio);
 
-    if (isNative) {
-      this.nativeAudio.preloadSimple(key, asset);
+      if (isNative) {
+        await this.nativeAudio.preloadSimple(key, asset);
+      }
     }
   }
 
